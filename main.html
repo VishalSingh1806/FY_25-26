@@ -314,10 +314,11 @@
 
   .closing-proof-card {
     min-height: 168px;
-    padding: 18px;
+    padding: 22px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 12px;
     overflow: hidden;
     position: relative;
   }
@@ -338,16 +339,21 @@
 
   .closing-proof-card strong {
     font-family: "Syne", sans-serif;
-    font-size: 1.05rem;
-    line-height: 1.25;
-    max-width: 11ch;
+    font-size: 1.12rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    max-width: 16ch;
+    position: relative;
+    z-index: 1;
   }
 
   .closing-proof-card p {
     color: var(--muted);
     font-size: 0.9rem;
-    line-height: 1.55;
-    max-width: 24ch;
+    line-height: 1.65;
+    max-width: none;
+    position: relative;
+    z-index: 1;
   }
 
   .metrics {
@@ -1861,12 +1867,12 @@
         label: "Q1 / Apr-Jun",
         phase: "Foundation and launch velocity",
         title: "Converted groundwork into shipped systems.",
-        summary: "Groundwork became live systems in 90 days.",
+        summary: "Groundwork became live systems.",
         updates: [
           { title: "OCR deployed", text: "95%+ accuracy achieved — removing 7–8 mins of manual processing per transaction.", kra: "KRA 1  40%" },
           { title: "ClimaOne V2 — BRD complete, took ownership of full build", text: "Created comprehensive BRD aligned with BIS guidelines. Original scope was to find a vendor and manage outsourced delivery — instead, independently evaluated the requirement and made the call to build in-house, cutting delivery timelines and eliminating vendor costs entirely.", kra: "KRA 1  40%", decision: true },
           { title: "Website delivery — zero delays", text: "All 4 sustainability pages approved and live — Zero Waste Event (Apr), Zero Waste Office + Special Projects (May), Textile Waste page in review by Sep. Zero timeline overruns across all deliveries.", kra: "KRA 2  15%" },
-          { title: "AWS → GCP migration completed — zero downtime", text: "Successfully migrated all 3 ClimaOne modules from AWS to Google Cloud Platform with zero downtime, improving system scalability and reducing infrastructure costs — foundation for all future platform work.", kra: "KRA 3  10%" }
+          { title: "AWS → GCP migration completed — zero downtime", text: "Successfully migrated all 3 ClimaOne modules from AWS to Google Cloud Platform with zero downtime, improving system scalability and reducing infrastructure costs(nearly 40-50 lakhs in one year) — foundation for all future platform work.", kra: "KRA 3  10%" }
         ],
         metrics: ["OCR live — 95%+ accuracy", "AWS → GCP — zero downtime", "4 pages delivered on time"],
         proofTitle: "OCR + infrastructure proof",
@@ -1925,7 +1931,7 @@
           { title: "GCP optimised — ₹52K saved monthly", text: "Monthly bill cut from ₹84K to ₹32–39K. 55% cost reduction, ₹5–6 lakhs saved annually.", kra: "KRA 3  10%" },
           { title: "Innovation pipeline activated", text: "Smart Bin R&D started. Textile ID at 92.4% accuracy — hardware confirmed, model training underway.", kra: "KRA 5  10%" },
           { title: "5 staff trained on-site — all daily active", text: "Conducted two weeks of hands-on on-site training at the plant in Jan, onboarding 5 sourcing and plant team members on ClimaOne V2. All 5 are daily active users from day one — zero drop-off.", kra: "KRA 6  5%" },
-          { title: "ReCircle Foundation website initiated", text: "Initiated and led design framework for ReCircle Foundation's website in Jan — structure, messaging and design direction defined in close coordination with internal stakeholders.", kra: "KRA 2  15%" }
+          { title: "ReCircle Foundation website initiated", text: "Initiated and led design framework for ReCircle Foundation's website in Feb — structure, messaging and design direction defined in close coordination with internal stakeholders.", kra: "KRA 2  15%" }
         ],
         metrics: ["38 live users", "7–8% chatbot engagement", "92.4% model accuracy", "₹52K/month saved"],
         proofTitle: "Live product proof",
@@ -1974,10 +1980,10 @@
       }
     ],
     closing: [
-      { title: "₹5–6 lakhs saved annually", text: "GCP infrastructure optimised in Jan — monthly bill reduced from ₹84K to ₹32–39K through targeted server cost reduction." },
-      { title: "700MT+ plastic traced", text: "ClimaOne V2 traced over 700 metric tonnes of plastic in its first 3 months of operation — zero downtime, 38 active users, full supply chain visibility where none existed before." },
-      { title: "Vendor scope → in-house delivery", text: "ClimaOne V2 was scoped as an outsourced, vendor-managed build. Independently made the call to develop it in-house — delivered faster, retained full IP, eliminated vendor costs, and traced 700MT+ of plastic in the first 3 months of go-live." },
-      { title: "Solo SPOC — zero escalations", text: "Single point of contact for all tech across the organisation — deployments, vendors, training, infrastructure, and day-to-day IT support for accounts, grants and other teams. Zero escalations, zero disruptions, full year." }
+      { title: "₹5–6 lakhs saved annually", text: "GCP infrastructure optimised in Jan — monthly bill cut from ₹84K to ₹32–39K. 55% cost reduction delivering over ₹5 lakhs in annual savings." },
+      { title: "Vendor → in-house → 700MT traced", text: "ClimaOne V2 was scoped for external vendors. Made the independent call to build it in-house — delivered faster, retained full IP, zero vendor costs. Result: 700MT+ of plastic traced, 38 active users, zero downtime in the first 3 months." },
+      { title: "7 products. 1 person. Full year.", text: "Every product on this page was designed, built, tested and deployed solo — while simultaneously owning infrastructure, documentation, cross-team IT support and active R&D. Zero escalations. Zero missed deadlines." },
+      { title: "Two R&D streams — next revenue", text: "Textile ID Tool at 92.4% accuracy and Smart Bin in feasibility — both positioned as next-cycle cost reduction and revenue opportunities for ReCircle." }
     ],
     hrKpis: [
       {
@@ -2316,7 +2322,9 @@
     closingSummary.innerHTML = appraisalData.closing.map((item, index) => `
       <article class="closing-proof-card ${index % 2 ? "alt" : ""}">
         <strong>${escapeHtml(item.title)}</strong>
-        <p>${escapeHtml(item.text)}</p>
+        <p>${escapeHtml(item.text)
+          .replace(/700MT\+/g, "<strong>700MT+</strong>")
+          .replace(/92\.4%/g, "<strong>92.4%</strong>")}</p>
       </article>
     `).join("");
   }
